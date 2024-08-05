@@ -71,6 +71,8 @@ class ProductController extends Controller
             return \view('product.index')->with('error', 'Product not found!' . $e->getMessage());
         }
 
+        $product->save();
+
         return view('product.edit', compact('product','categories'));
     }
 

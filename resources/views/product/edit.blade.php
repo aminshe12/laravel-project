@@ -45,12 +45,12 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                         <div class="form-group">
-                            <label for="inputEmail">Image</label>
-                            <input id="inputEmail" name="image" value="{{ $product->image }}" placeholder="" class="form-control">
+                            <label for="image">Image</label>
+                            <input type="file" name="image" class="form-control">
+                            @error('image')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
-                        @error('Image')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
                         <button type="submit" class="btn btn-success">Update</button>
                     </form>
                 </div>
