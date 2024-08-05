@@ -25,7 +25,7 @@ route::group(["prefix" => "product"], function (){
     Route::get   ("/"         ,[productController::class,"index"    ])->name("product.index"    );
     Route::get   ("/create"   ,[productController::class,"create"   ])->name("product.create"   );
     Route::post  ("/"         ,[productController::class,"store"    ])->name("product.store"    );
-    Route::put   ("/{id}"     ,[productController::class,"update"   ])->name("product.update"   );
+    Route::patch ("/{id}"     ,[productController::class,"update"   ])->name("product.update"   );
     Route::delete("/{id}"     ,[productController::class,"destroy"  ])->name("product.delete"   );
     Route::get   ("/edit/{id}",[productController::class,"edit"     ])->name("product.edit"     );
 
@@ -38,6 +38,5 @@ route::group(["prefix" => "user"], function (){
     Route::put   ("/{id}"       ,[userController::class,"update"        ])->name("user.update"    );
     Route::delete("/{id}"       ,[userController::class,"destroy"       ])->name("user.delete"    );
     Route::get   ("/edit/{id}"  ,[userController::class,"edit"          ])->name("user.edit"      );
-    Route::patch ('/status/{id}',[UserController::class,"updateStatus"  ])->name('user.status'    );
-
+    Route::get   ('/status/{id}',[UserController::class,"updateStatus"  ])->name('user.status'    );
 });

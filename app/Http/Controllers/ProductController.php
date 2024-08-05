@@ -35,14 +35,13 @@ class ProductController extends Controller
     public function store(ProductStoreRequest $request): RedirectResponse
     {
         $product              = new Product();
-        $product->name        = $request->name;
+        $product->name        = $request->get('name');
         $product->description = $request->get('description');
         $product->price       = $request->input('price');
         $product->category_id = $request->input('category_id');
-//        $product->image       = $request->file('image');
 
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('images', 'public');
+            $imagePath      = $request->file('image')->store('images', 'public');
             $product->image = $imagePath;
         }
 
@@ -65,13 +64,13 @@ class ProductController extends Controller
      */
     public function edit(string $id): View
     {
-        try{ $categories = category::all();
+        try
+        {
+            $categories = category::all();
             $product = Product::query()->findOrFail((int)$id);
         }catch (Exception $e) {
             return \view('product.index')->with('error', 'Product not found!' . $e->getMessage());
         }
-
-        $product->save();
 
         return view('product.edit', compact('product','categories'));
     }
@@ -81,23 +80,25 @@ class ProductController extends Controller
      */
     public function update(ProductUpdateRequest $request, string $id ): RedirectResponse
     {
-
-//
-        try {
+        try
+        {
             $product              = Product::query()->findOrFail((int)$id);
             $product->name        = $request->get('name'       );
             $product->description = $request->get('description');
             $product->price       = $request->get('price'      );
-            $product->category_id = $request->get('category_id'   );
-            $product->image       = $request->get('image'      );
+            $product->category_id = $request->get('category_id');
+
+            if ($request->hasFile('image')) {
+                $imagePath      = $request->file('image')->store('images', 'public');
+                $product->image = $imagePath;
+            }
+
             $product->update();
             return redirect()->route('product.index')->with('success', 'Product updated successfully.');
         } catch (Exception $e) {
             return redirect()->route('product.index')->with('error', 'Error occurred while updating product: ' . $e->getMessage());
         }
-
     }
-
 
     /**
      * Remove the specified resource from storage.

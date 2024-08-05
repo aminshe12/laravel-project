@@ -70,40 +70,40 @@
         <!-- end basic table  -->
         <!-- ============================================================== -->
     </div>
-    @push('js')
-        <script>
-            let elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+@endsection
+@section('script')
+    <script>
+        let elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
 
-            elems.forEach(function(html) {
-                let switchery = new Switchery(html,  { size: 'small' });
-            });
-            $(document).ready(function(){
-                $('.js-switch').change(function () {
-                    let status = $(this).prop('checked') === true ? 1 : 0;
-                    let userId = $(this).data('id');
-                    $.ajax({
-                        type: "GET",
-                        dataType: "json",
-                        url: '{{ route('user.status', ':id') }}'.replace(':id', userId),
-                        data: {'status': status, 'user_id': userId},
-                    });
-                    const Toast = Swal.mixin({
-                        toast: true,
-                        position: "top-end",
-                        showConfirmButton: false,
-                        timer: 3000,
-                        timerProgressBar: true,
-                        didOpen: (toast) => {
-                            toast.onmouseenter = Swal.stopTimer;
-                            toast.onmouseleave = Swal.resumeTimer;
-                        }
-                    });
-                    Toast.fire({
-                        icon: "success",
-                        title: "Status Changed Successfully"
-                    });
+        elems.forEach(function(html) {
+            let switchery = new Switchery(html,  { size: 'small' });
+        });
+        $(document).ready(function(){
+            $('.js-switch').change(function () {
+                let status = $(this).prop('checked') === true ? 1 : 0;
+                let userId = $(this).data('id');
+                $.ajax({
+                    type: "GET",
+                    dataType: "json",
+                    url: '{{ route('user.status', ':id') }}'.replace(':id', userId),
+                    data: {'status': status, 'user_id': userId},
+                });
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    }
+                });
+                Toast.fire({
+                    icon: "success",
+                    title: "Status Changed Successfully"
                 });
             });
-        </script>
-    @endpush
+        });
+    </script>
 @endsection
