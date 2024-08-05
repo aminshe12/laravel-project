@@ -12,9 +12,9 @@
             <div class="card">
                 <h5 class="card-header">Basic Form</h5>
                 <div class="card-body">
-                    <form action="{{ route('product.update', ['id' => $product->id]) }}" method="POST">
+                    <form action="{{ route('product.update', ['id' => $product->id]) }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        @method('PUT')
+                        @method('PATCH')
                         <select name="category_id" id="cars">
                             @foreach($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -48,7 +48,7 @@
                             <label for="image">Image</label>
                             <input type="file" name="image" class="form-control">
                             @error('image')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                                <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <button type="submit" class="btn btn-success">Update</button>

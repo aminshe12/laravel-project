@@ -11,7 +11,9 @@ use Illuminate\Notifications\Notifiable;
  * @property string name
  * @property string email
  * @property string password
+ * @property integer status
  * @property string role
+ * @method static findOrFail(mixed $user_id)
  */
 
 class User extends Authenticatable

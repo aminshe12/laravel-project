@@ -14,7 +14,6 @@ use mysql_xdevapi\Exception;
 
 class UserController extends Controller
 {
-    // Show all users
     public function index(): View
     {
         $users = User::all();
@@ -27,16 +26,8 @@ class UserController extends Controller
         return view('user.create');
     }
 
-    // Store a newly created user in the database
     public function store(UserStoreRequest $request): RedirectResponse
     {
-//        $request->validate([
-//            'name'     => 'required|string|max:255',
-//            'email'    => 'required|string|email|max:255|unique:users',
-//            'password' => 'required|string|min:8|confirmed',
-////            'role'     => 'required|string|in:customer,seller',
-//        ]);
-
         try
         {
             $user           = new User();
@@ -51,14 +42,12 @@ class UserController extends Controller
         return redirect()->route('user.index')->with('success', 'User created successfully.');
     }
 
-    // Display the specified user
     public function show($id): View
     {
         $user = User::findOrFail($id);
         return view('user.show', compact('user'));
     }
 
-    // Show the form for editing the specified user
     public function edit(string $id): View
     {
         try {
@@ -72,7 +61,6 @@ class UserController extends Controller
 
     public function update(UserUpdateRequest $request, $id): RedirectResponse
     {
-
         try
         {
             $user           = User::query()->findOrFail((int)$id);
@@ -85,7 +73,6 @@ class UserController extends Controller
         }catch (Exception $e) {
             return redirect()->route('user.index')->with('success', 'Error occurred while updating user: ' . $e->getMessage());
         }
-//
 
         return redirect()->route('user.index')->with('success', 'User updated successfully.');
     }
@@ -103,7 +90,6 @@ class UserController extends Controller
         return response()->json(['message' => 'User status updated successfully.']);
     }
 
-    // Remove the specified user from the database
     public function destroy(string $id): RedirectResponse
     {
         try{
