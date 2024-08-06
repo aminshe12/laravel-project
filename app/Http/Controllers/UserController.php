@@ -10,9 +10,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
-use mysql_xdevapi\Exception;
-
+use http\Exception;
 class UserController extends Controller
 {
     public function index(): View
@@ -21,7 +19,6 @@ class UserController extends Controller
         return view('user.index', compact('users'));
     }
 
-    // Show the form for creating a new user
     public function create(): View
     {
         return view('user.create');
@@ -38,7 +35,7 @@ class UserController extends Controller
             $user->password = Hash::make($request->get('password'));
             $user->save();
         }catch (Exception $e) {
-            return redirect()->route('user.store')->with('error', 'There was an error adding the user: ' . $e->getMessage());
+            return redirect()->route('user.create')->with('error', 'There was an error adding the user: ' . $e->getMessage());
         }
 
         return redirect()->route('user.index')->with('success', 'User created successfully.');
