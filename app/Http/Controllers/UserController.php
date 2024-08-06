@@ -10,7 +10,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use http\Exception;
+use Exception;
 class UserController extends Controller
 {
     public function index(): View
