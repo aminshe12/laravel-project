@@ -19,14 +19,25 @@
                             <label for="inputText3" class="col-form-label">Name</label>
                             <input id="inputText3" name="name" type="text" value="{{ $user->name }}" class="form-control" required>
                         </div>
+                        @error('name')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                         <div class="form-group">
                             <label for="inputEmail">Email</label>
                             <input id="inputEmail" name="email" value="{{ $user->email }}" placeholder="!!!" class="form-control">
-                        </div>
+                        </div>@error('email')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                         <div class="form-group">
-                            <label for="inputEmail">Password</label>
-                            <input id="inputEmail" name="password" value="{{ $user->password }}" placeholder="!!!..." class="form-control">
+                            <label for="inputStatus">Status</label>
+                            <select id="inputStatus" name="status" class="form-control" required>
+                                <option value="1">Active</option>
+                                <option value="0">Inactive</option>
+                            </select>
                         </div>
+                        @error('status')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                         <button type="submit" class="btn btn-success">Update</button>
                     </form>
                 </div>
