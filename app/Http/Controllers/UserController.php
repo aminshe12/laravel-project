@@ -10,8 +10,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use mysql_xdevapi\Exception;
-
+use Exception;
 class UserController extends Controller
 {
     public function index(): View
@@ -20,7 +19,6 @@ class UserController extends Controller
         return view('user.index', compact('users'));
     }
 
-    // Show the form for creating a new user
     public function create(): View
     {
         return view('user.create');
@@ -32,6 +30,7 @@ class UserController extends Controller
         {
             $user           = new User();
             $user->name     = $request->get('name');
+            $user->status   = $request->get('status');
             $user->email    = $request->get('email');
             $user->password = Hash::make($request->get('password'));
             $user->save();
@@ -73,7 +72,6 @@ class UserController extends Controller
         }catch (Exception $e) {
             return redirect()->route('user.index')->with('success', 'Error occurred while updating user: ' . $e->getMessage());
         }
-
         return redirect()->route('user.index')->with('success', 'User updated successfully.');
     }
 

@@ -24,10 +24,9 @@ class UserStoreRequest extends FormRequest
     {
         return [
             'name'     => 'required|string|max:255',
-            'status'   => 'required|in:active,inactive',
+            'status'   => 'required|int',
             'email'    => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
-            'role'     => 'required|string|in:customer,seller',
+            'password' => 'required|string|min:8',
         ];
     }
 }

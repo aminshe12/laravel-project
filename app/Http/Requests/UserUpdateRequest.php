@@ -23,11 +23,10 @@ class UserUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'     => 'required|string|max:255',
-            'status'   => 'required|in:active,inactive',
-            'email'    => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
-            'role'     => 'required|string|in:customer,seller',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email,' . $this->route('id'),
+            'password' => 'nullable|string|min:8|confirmed',
+            'status'   => 'required|int',
         ];
     }
 }
