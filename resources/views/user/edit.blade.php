@@ -39,6 +39,7 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                         <button type="submit" class="btn btn-success">Update</button>
+                        <button type="button" class="btn btn-secondary" onclick="window.history.back();">Back</button>
                     </form>
                 </div>
             </div>

@@ -6,8 +6,8 @@
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="section-block" id="basicform">
-                <h3 class="section-title">Basic Form Elements</h3>
-                <p>Use custom button styles for actions in forms, dialogs, and more with support for multiple sizes, states, and more.</p>
+                <h3 class="section-title">create new user</h3>
+                <p style="margin: 15px">Fill in the requested items carefully</p>
             </div>
             <div class="card">
                 <h5 class="card-header">Basic Form</h5>
@@ -32,6 +32,7 @@
                             <label for="inputEmail">Password</label>
                             <input type="password" id="inputEmail" name="password" placeholder="8 characters minimum" minlength="8" class="form-control">
                         </div>
+                        
                         @error('password')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -46,6 +47,7 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                         <button type="submit" class="btn btn-success">Submit</button>
+                        <button type="button" class="btn btn-secondary" onclick="window.history.back();">Back</button>
                     </form>
                 </div>
             </div>

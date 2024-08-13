@@ -5,17 +5,25 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Http\Requests\UserUpdateStatusRequest;
+use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Exception;
+
 class UserController extends Controller
 {
-    public function index(): View
+    public function index(Request $request): View
     {
-        $users = User::all();
+        $query = User::query();
+        if (request()->has('search')) {
+            $search = $request->input('search');
+            $query = $query->where('name', 'LIKE', "%{$search}%");
+        }
+
+        $users = $query->get();
         return view('user.index', compact('users'));
     }
 

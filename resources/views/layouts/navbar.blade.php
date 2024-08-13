@@ -3,16 +3,18 @@
 <!-- ============================================================== -->
 <div class="dashboard-header">
     <nav class="navbar navbar-expand-lg bg-white fixed-top">
-        <a class="navbar-brand" href="../index.html">Store Project</a>
+        <a class="navbar-brand" href="">Store Project</a> 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse " id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto navbar-right-top">
                 <li class="nav-item">
-                    <div id="custom-search" class="top-search-bar">
-                        <input class="form-control" type="text" placeholder="Search..">
-                    </div>
+                    <form action="" method="GET" class="top-search-bar">
+                        <div class="input-group">
+                            <input type="text" name="search" class="form-control" placeholder="Search by name" value="{{ request()->input('search') }}">
+                        </div>
+                    </form>
                 </li>
                 <li class="nav-item dropdown notification">
                     <a class="nav-link nav-icons" href="#" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-fw fa-bell"></i> <span class="indicator"></span></a>

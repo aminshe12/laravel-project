@@ -6,16 +6,17 @@
         <!-- ============================================================== -->
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="card">
-                <h5 class="card-header">Basic Table</h5>
+                <h5 class="card-header">Product List</h5>
                 <style>
                     .custom-margin-top {
                         margin-top: 20px;
                         margin-left: 30px;
                     }
                 </style>
-                <form class="d-flex">
-                    <a href="{{ route('product.create') }}" class="btn btn-warning btn-sm rounded-pill custom-margin-top">create</a>
+                <form class="d-flex justify-content-end">
+                    <a href="{{ route('product.create') }}" class="btn btn-outline-success custom-margin-top" style="margin-right: 5%">Create</a>
                 </form>
+
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered first">
@@ -37,7 +38,7 @@
                                     <td class="text-center">{{ $product->category ? $product->category->name : 'No Category' }}</td>  {{--What is the problem--}}
                                     <td class="text-center">{{ $product->name }}</td>
                                     <td class="text-center">{{ $product->description }}</td>
-                                    <td class="text-center">{{ $product->price }}</td>
+                                    <td class="text-center">${{ $product->price }}</td>
                                     <td class="text-center">
                                         @if($product->image)
                                             <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" style="max-width: 32px; height: auto;">

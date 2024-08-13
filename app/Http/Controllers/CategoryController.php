@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CategoryStoreRequest;
 use App\Http\Requests\categoryUpdateRequest;
 use App\Models\Category;
+use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use SebastianBergmann\Diff\Exception;
@@ -14,9 +15,16 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index(Request $request): View
     {
-        $categories = Category::get();
+        $query = Category::query();
+        if (request()->has('search')) {
+            $search = $request->input('search');
+            $query = $query->where('name', 'LIKE', "%{$search}%");
+        }
+        $categories = $query->get();
+
+//        $categories = Category::get();
         return view('category.index', compact('categories'));
     }
 
@@ -33,11 +41,6 @@ class CategoryController extends Controller
      */
     public function store(CategoryStoreRequest $request): RedirectResponse
     {
-        $request->validate([
-            'name'        => 'required|string|max:255',
-            'description' => 'required|string|max:255',
-        ]);
-
         try
         {
             $category              = new Category();
