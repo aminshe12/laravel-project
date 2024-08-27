@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Http\Request;
 use App\Http\Requests\CategoryStoreRequest;
 use App\Http\Requests\categoryUpdateRequest;
 use App\Models\Category;
@@ -14,10 +14,35 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index(Request $request): View
     {
-        $categories = Category::get();
+        $query = Category::query();
+        if (request()->has('search')) {
+            $search = $request->input('search');
+            $query = $query->where('name', 'LIKE', "%{$search}%");
+        }
+        $categories = $query->get();
+
+//        $categories = Category::get();
         return view('category.index', compact('categories'));
+    }
+
+    public function getCategoryById(string $id): \Illuminate\Http\JsonResponse
+    {
+        $category = Category::query()->findOrFail((int)$id);
+
+        if (is_null($category)) {
+            return response()->json(["message" => "Category not found"], 404);
+        }
+
+        return response()->json(
+            [
+                'data' => [
+                    'name'        => $category->name,
+                    'description' => $category->description,
+                ]
+            ]
+        );
     }
 
     /**

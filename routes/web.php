@@ -21,6 +21,10 @@ Route::group(["prefix" => "category"], function (){
 
 });
 
+Route::group(["prefix" => "api/category"], function (){
+    Route::get   ("/{id}"     ,[CategoryController::class,"getCategoryById"])->name("getCategory");
+});
+
 route::group(["prefix" => "product"], function (){
     Route::get   ("/"         ,[productController::class,"index"    ])->name("product.index"    );
     Route::get   ("/create"   ,[productController::class,"create"   ])->name("product.create"   );
@@ -40,3 +44,4 @@ route::group(["prefix" => "user"], function (){
     Route::get   ("/edit/{id}"  ,[userController::class,"edit"          ])->name("user.edit"      );
     Route::get   ('/status/{id}',[UserController::class,"updateStatus"  ])->name('user.status'    );
 });
+
