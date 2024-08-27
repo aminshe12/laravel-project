@@ -40,3 +40,4 @@ route::group(["prefix" => "user"], function (){
     Route::get   ("/edit/{id}"  ,[userController::class,"edit"          ])->name("user.edit"      );
     Route::get   ('/status/{id}',[UserController::class,"updateStatus"  ])->name('user.status'    );
 });
+

@@ -6,7 +6,7 @@
         <!-- ============================================================== -->
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="card">
-                <h5 class="card-header">Basic Table</h5>
+                <h5 class="card-header">Category List</h5>
 
                 <style>
                     .custom-margin-top {
@@ -15,11 +15,9 @@
                     }
                 </style>
 
-                <form class="d-flex">
-                    <a href="{{ route('category.create') }}" class="btn btn-warning btn-sm rounded-pill custom-margin-top">create</a>
+                <form class="d-flex justify-content-end">
+                    <a href="{{ route('category.create') }}" class="btn btn-outline-success custom-margin-top" style="margin-right: 5%">Create</a>
                 </form>
-
-                {{--                <a href="{{ route('category.create') }}" class="btn btn-outline-success">create</a>--}}
 
                 <div class="card-body">
                     <div class="table-responsive">

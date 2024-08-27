@@ -35,3 +35,21 @@
 </body>
 
 </html>
+<style>
+    .footer {
+        position: fixed;
+        bottom: 0;
+        left: 15.7%;
+        width: 100%;
+        background-color: #f8f9fa; /* Optional: match with your theme */
+        padding: 10px 0;
+        z-index: 1000; /* Ensure the footer stays on top of other elements */
+        text-align: center;
+        box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Optional: add a shadow for better visibility */
+    }
+
+    body {
+        padding-bottom: 60px; /* Adjust this value according to the height of the footer */
+    }
+
+</style>
