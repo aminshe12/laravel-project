@@ -6,6 +6,7 @@ use App\Http\Requests\ProductStoreRequest;
 use App\Http\Requests\ProductUpdateRequest;
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use SebastianBergmann\Diff\Exception;
@@ -15,9 +16,17 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index( Request $request): View
     {
-        $products = Product::query()->with('category')->get();
+        $query = product::query();
+        if (request()->has('search')) {
+            $search = $request->input('search');
+            $query = $query->where('name', 'LIKE', "%{$search}%");
+        }
+
+        $products = $query->get();
+
+//        $products = Product::query()->with('category')->get();
         return view('product.index',compact('products'));
     }
     /**
